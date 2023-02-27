@@ -2,7 +2,10 @@
 
 ### First Step
 ```bash
-git clone 
+git clone https://github.com/Rafli-Dewanto/mini-project-server.git
+```
+
+```bash
 cd mini-project-server
 ```
 
