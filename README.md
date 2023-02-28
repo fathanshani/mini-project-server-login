@@ -8,6 +8,10 @@ git clone https://github.com/Rafli-Dewanto/mini-project-server.git
 ```bash
 cd mini-project-server
 ```
+### Copy .env.example -> .env
+```bash
+cp .env.example .env
+```
 
 ### Install Dependensi
 ```bash
