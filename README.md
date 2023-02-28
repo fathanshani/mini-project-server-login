@@ -4,7 +4,8 @@
 - Node : v18.14.2
 - NPM : v9.5.0 <br>
 
-Jika tidak ingin install ulang node, bisa menggunakan Node Version Manager
+Jika tidak ingin install ulang node, bisa menggunakan Node Version Manager  
+**Semua library yang dibutuhkan sudah diinstall!**
 
 ### First Step
 ```bash
