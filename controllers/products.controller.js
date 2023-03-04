@@ -14,7 +14,17 @@ export const getAllProducts = (req, res) => {
 }
 
 export const getProductById = (req, res) => {
-    
+    const para = req.params.id;
+    const sql = `SELECT * FROM products WHERE id = '${para}'`
+    Connection.query(sql, (err, result) => {
+        if(err) {
+            return res.status(404).json({ message: "Produk tidak ditemukan" })
+        }
+        res.status(200).json({
+            payload: result,
+            message: "Produk ditemukan",
+        })
+    })
 }
 
 export const createProduct = (req, res) => {
