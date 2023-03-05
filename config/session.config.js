@@ -1,6 +1,6 @@
 const oneMinute = 60 * 1000
 
-export default config = {
+const config = {
     secret: process.env.SESSION_SECRET_KEY,
     saveUninitialized: false,
     resave: false,
@@ -9,3 +9,5 @@ export default config = {
         secure: false // set to true in production
     }
 }
+
+export default config;
