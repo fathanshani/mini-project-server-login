@@ -32,20 +32,11 @@ export const getProductById = (req, res) => {
 };
 
 export const createProduct = (req, res) => {
-  let uuid1 = crypto.randomUUID();
-  let uuid2 = crypto.randomUUID();
-  let uuid3 = crypto.randomUUID();
-  const {
-    product_name,
-    price,
-    quantity,
-    description,
-    brand_name,
-    category_name,
-  } = req.body;
-  console.log(req.body);
-  const sql = `INSERT INTO products (id, product_name, price, quantity, description, brand_id, brand_name, category_id, category_name) VALUES ('${uuid1}', '${product_name}', '${price}', '${quantity}', '${description}', '${uuid2}', '${brand_name}', '${uuid3}', '${category_name}')`;
-  db.query(sql, (err, result) => {
+  let uuid = crypto.randomUUID();
+  const { product_name, price, quantity, description, brand, category } =
+    req.body;
+  const sql = `INSERT INTO products (id, product_name, price, quantity, brand, category, description) VALUES ('${uuid}', '${product_name}', ${price}, ${quantity}, '${brand}', '${category}', '${description}')`;
+  Connection.query(sql, (err, result) => {
     if (err) {
       return res.status(500).json({ message: err });
     }
@@ -62,28 +53,28 @@ export const createProduct = (req, res) => {
 export const updateProduct = (req, res) => {};
 
 export const deleteProduct = (req, res) => {
-    const { id } = req.params;
-    const sql = `DELETE FROM products WHERE id = '${id}';`
-    Connection.query(sql, (err, results) => {
-        if (err) {
-            return res.status(500).json({
-                code: 500,
-                status: 'INTERNAL_SERVER_ERROR',
-                message: err
-            })
-        }
-        
-        if (results.affectedRows === 0) {
-            return res.status(404).json({
-                code: 404,
-                status: 'NOT_FOUND',
-            })
-        }
+  const { id } = req.params;
+  const sql = `DELETE FROM products WHERE id = '${id}';`;
+  Connection.query(sql, (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        code: 500,
+        status: "INTERNAL_SERVER_ERROR",
+        message: err,
+      });
+    }
 
-        res.status(200).json({
-            code: 200,
-            status: 'OK',
-            message: 'product deleted successfully'
-        })
-    })
-}
+    if (results.affectedRows === 0) {
+      return res.status(404).json({
+        code: 404,
+        status: "NOT_FOUND",
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      status: "OK",
+      message: "product deleted successfully",
+    });
+  });
+};
