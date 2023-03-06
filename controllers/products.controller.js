@@ -18,7 +18,10 @@ export const getProductById = (req, res) => {
     const sql = `SELECT * FROM products WHERE id = '${para}'`
     Connection.query(sql, (err, result) => {
         if(err) {
-            return res.status(404).json({ message: "Produk tidak ditemukan" })
+            return res.status(500).json({ message: err })
+        }
+        if(result.length == 0){
+            return res.status(404).json({ message: "Produk tidak ditemukan"});
         }
         res.status(200).json({
             payload: result,
