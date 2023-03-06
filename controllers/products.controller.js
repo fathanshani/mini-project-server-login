@@ -62,20 +62,28 @@ export const createProduct = (req, res) => {
 export const updateProduct = (req, res) => {};
 
 export const deleteProduct = (req, res) => {
-  const { id } = req.params;
-  const sql = `DELETE FROM products WHERE id = '${id}';`;
-  Connection.query(sql, (err, results) => {
-    if (err) {
-      return res.status(404).json({
-        code: 404,
-        status: "NOT_FOUND",
-        message: "Product not found",
-      });
-    }
-    res.status(200).json({
-      code: 200,
-      status: "OK",
-      message: "product deleted successfully",
-    });
-  });
-};
+    const { id } = req.params;
+    const sql = `DELETE FROM products WHERE id = '${id}';`
+    Connection.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({
+                code: 500,
+                status: 'INTERNAL_SERVER_ERROR',
+                message: err
+            })
+        }
+        
+        if (results.affectedRows === 0) {
+            return res.status(404).json({
+                code: 404,
+                status: 'NOT_FOUND',
+            })
+        }
+
+        res.status(200).json({
+            code: 200,
+            status: 'OK',
+            message: 'product deleted successfully'
+        })
+    })
+}
