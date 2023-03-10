@@ -6,7 +6,7 @@ const config = {
     resave: false,
     cookie: { 
         maxAge: oneMinute, 
-        secure: false // set to true in production
+        secure: true // set to true in production
     }
 }
 
