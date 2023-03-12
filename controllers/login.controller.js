@@ -25,9 +25,14 @@ export const login = (req, res) => {
 // console.log(result[0].password)
 // if want to get value from result use result[0].fieldName
 
-// export const me = (req, res) => {
-//     if(!req.session.userId){
-//         return res.status(401).json({msg: "Mohon login ke akun Anda!"})
-//     }
-//     const sql = `SELECT * FROM users WHERE id`
-// }
+// butuh session depedency
+export const me = (req, res) => {
+    if(!req.session.userId){
+        return res.status(401).json({msg: "Mohon login ke akun Anda!"})
+    }
+    const sql = `SELECT (id, name) FROM users WHERE id = '${req.session.userId}'`;
+    Connection.query(sql, (err, result) => {
+        if(err) return res.status(404).json({msg: "User tidak ditemukan"});
+        res.status(200).json(result);
+    })
+}
