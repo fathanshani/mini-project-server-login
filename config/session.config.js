@@ -2,11 +2,11 @@ const oneMinute = 60 * 1000
 
 const config = {
     secret: process.env.SESSION_SECRET_KEY,
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: false,
     cookie: { 
         maxAge: oneMinute, 
-        secure: false // set to true in production
+        secure: true // set to true in production
     }
 }
 
